@@ -20,7 +20,7 @@ gulp.task('babel', () =>
     .pipe(gulp.dest('dist'))
 );
 
-gulp.task('default', () =>
+gulp.task('imagemin', () =>
 gulp.src('.img/*')
     .pipe(imagemin())
     .pipe(gulp.dest('build/img'))
