@@ -17,12 +17,12 @@
   },
   "homepage": "https://github.com/lucasjs/lucasjs.github.io#readme",
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-connect": "^5.0.0",
     "gulp-imagemin": "^3.4.0",
-    "gulp-stylus": "^2.6.0",
-    "gulp-webserver": "^0.9.1"
+    "gulp-stylus": "^2.6.0"
   }
 }

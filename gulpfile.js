@@ -1,8 +1,8 @@
 var gulp = require('gulp');
 var stylus = require('gulp-stylus');
-var webserver = require('gulp-webserver');
+var connect = require('gulp-connect');
 var imagemin = require('gulp-imagemin');
-var babel = require('gulp-babel');
+const babel = require('gulp-babel');
 
 gulp.task('stylus', function () {
     return gulp.src('./src/styles/*.styl')
@@ -13,32 +13,33 @@ gulp.task('stylus', function () {
 });
 
 gulp.task('babel', () =>
-    gulp.src('./src/js/*.js')
+gulp.src('./src/js/*.js')
     .pipe(babel({
         presets: ['env']
     }))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('./build/js'))
 );
 
+
 gulp.task('imagemin', () =>
-gulp.src('.img/*')
+    gulp.src('.img/*')
     .pipe(imagemin())
-    .pipe(gulp.dest('build/img'))
+    .pipe(gulp.dest('./build/img'))
 );
 
 gulp.task('watch', function () {
     gulp.watch(['./src/styles/*.styl'], ['stylus'])
     gulp.watch(['./src/js/*.js'], ['babel'])
+    gulp.watch(['./src/img/*.*'], ['imagemin'])
 });
 
-gulp.task('webserver', function () {
-    gulp.src('./src/views')
-        .pipe(webserver({
-            livereload: true,
-            directoryListing: true,
-            open: true
-        }));
+gulp.task('connect', function () {
+    connect.server({
+        root: './src/views',
+        livereload: true,
+        port: 8000
+    });
 });
 
-gulp.task('build', ['stylus','imagemin','babel']);
-gulp.task('server', ['webserver', 'watch']);
+gulp.task('build', ['stylus', 'babel', 'imagemin']);
+gulp.task('server', ['connect','watch']);
