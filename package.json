@@ -1,0 +1,23 @@
+{
+  "name": "lucasjs.github.io",
+  "version": "1.0.0",
+  "description": "My Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasjs/lucasjs.github.io.git"
+  },
+  "author": "Lucas Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucasjs/lucasjs.github.io/issues"
+  },
+  "homepage": "https://github.com/lucasjs/lucasjs.github.io#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-stylus": "^2.6.0"
+  }
+}
