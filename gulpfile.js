@@ -10,14 +10,16 @@ gulp.task('stylus', function () {
             compress: true
         }))
         .pipe(gulp.dest('./build/css'))
+        .pipe(connect.reload())
 });
 
 gulp.task('babel', () =>
-gulp.src('./src/js/*.js')
+    gulp.src('./src/js/*.js')
     .pipe(babel({
         presets: ['env']
     }))
     .pipe(gulp.dest('./build/js'))
+    .pipe(connect.reload())
 );
 
 
@@ -25,12 +27,19 @@ gulp.task('imagemin', () =>
     gulp.src('.img/*')
     .pipe(imagemin())
     .pipe(gulp.dest('./build/img'))
+    .pipe(connect.reload())
 );
+
+gulp.task('html', function () {
+    gulp.src('./src/views/*.html')
+    .pipe(connect.reload())
+});
 
 gulp.task('watch', function () {
     gulp.watch(['./src/styles/*.styl'], ['stylus'])
     gulp.watch(['./src/js/*.js'], ['babel'])
     gulp.watch(['./src/img/*.*'], ['imagemin'])
+    gulp.watch('./src/views/*.html', ['html']);
 });
 
 gulp.task('connect', function () {
@@ -41,5 +50,5 @@ gulp.task('connect', function () {
     });
 });
 
-gulp.task('build', ['stylus', 'babel', 'imagemin']);
-gulp.task('server', ['connect','watch']);
+gulp.task('build', ['stylus', 'babel', 'imagemin', 'html']);
+gulp.task('server', ['connect', 'watch']);
