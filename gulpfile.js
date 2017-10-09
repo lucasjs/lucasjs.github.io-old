@@ -52,7 +52,7 @@ gulp.task('imagemin', () =>
 gulp.task('watch', function () {
 	gulp.watch('./src/views/*.html', ['html']);
 	gulp.watch(['./src/styles/*.styl'], ['stylint', 'stylus'])
-	gulp.watch(['./src/js/*.js'], ['eslint', 'babel'])	
+	gulp.watch(['./src/js/*.js'], ['eslint'])	
 	gulp.watch(['./src/img/*.*'], ['imagemin'])	
 });
 
