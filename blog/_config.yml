@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Lucas S
+title: Lucas J S
 subtitle:
 description:
-author: Lucas S
+author: Lucas J S
 language: pt-br
 timezone:
 
@@ -72,13 +72,21 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: minos
+theme: edinburgh
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: lucasjs.github.io
+  repo: https://github.com/lucasjs/lucasjs.github.io
 
 exclude_generator:
 - home
+
+menu:
+  Home: /
+  Work: work
+ # Blog: blog
+  Talks: talks
+  Linkedin: https://www.linkedin.com/in/lucasjsilva/
+  Github: https://github.com/lucasjs
