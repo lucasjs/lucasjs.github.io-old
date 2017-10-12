@@ -43,7 +43,7 @@ gulp.task('babel', () =>
 );
 
 gulp.task('imagemin', () =>
-	gulp.src('.img/*')
+	gulp.src('./src/img/*')
 	.pipe(imagemin())
 	.pipe(gulp.dest('./build/img'))
 	.pipe(connect.reload())
