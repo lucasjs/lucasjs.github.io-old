@@ -6,25 +6,25 @@ const eslint = require('gulp-eslint');
 const babel = require('gulp-babel');
 const connect = require('gulp-connect');
 
-gulp.task('html', function () {
+gulp.task('html', () =>
 	gulp.src('./src/views/*.html')
-		.pipe(connect.reload())
-});
+	.pipe(connect.reload())
+);
 
-gulp.task('stylint', function () {
-	return gulp.src('./src/styles/*.styl')
-		.pipe(stylint())
-		.pipe(stylint.reporter());
-});
+gulp.task('stylint', () =>
+	gulp.src('./src/styles/*.styl')
+	.pipe(stylint())
+	.pipe(stylint.reporter());
+);
 
-gulp.task('stylus', function () {
-	return gulp.src('./src/styles/*.styl')
-		.pipe(stylus({
-			compress: true
-		}))
-		.pipe(gulp.dest('./build/css'))
-		.pipe(connect.reload())
-});
+gulp.task('stylus', () =>
+	gulp.src('./src/styles/*.styl')
+	.pipe(stylus({
+		compress: true
+	}))
+	.pipe(gulp.dest('./build/css'))
+	.pipe(connect.reload())
+);
 
 gulp.task('eslint', () =>
 	gulp.src('./src/js/*.js')
@@ -49,20 +49,20 @@ gulp.task('imagemin', () =>
 	.pipe(connect.reload())
 );
 
-gulp.task('watch', function () {
-	gulp.watch('./src/views/*.html', ['html']);
+gulp.task('watch', () =>
+	gulp.watch('./src/views/*.html', ['html'])
 	gulp.watch(['./src/styles/*.styl'], ['stylint', 'stylus'])
 	gulp.watch(['./src/js/*.js'], ['eslint'])	
 	gulp.watch(['./src/img/*.*'], ['imagemin'])	
-});
+);
 
-gulp.task('connect', function () {
+gulp.task('connect', () =>
 	connect.server({
 		root: './src/views',
 		livereload: true,
 		port: 8000
 	});
-});
+);
 
 gulp.task('build', ['html', 'stylint', 'stylus', 'imagemin', 'eslint', 'babel']);
 gulp.task('server', ['connect', 'watch']);
