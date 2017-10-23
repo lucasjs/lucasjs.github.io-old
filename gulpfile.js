@@ -1,10 +1,10 @@
-var gulp = require('gulp');
-var stylint = require('gulp-stylint');
-var stylus = require('gulp-stylus');
-var imagemin = require('gulp-imagemin');
+const gulp = require('gulp');
+const stylint = require('gulp-stylint');
+const stylus = require('gulp-stylus');
+const imagemin = require('gulp-imagemin');
 const eslint = require('gulp-eslint');
 const babel = require('gulp-babel');
-var connect = require('gulp-connect');
+const connect = require('gulp-connect');
 
 gulp.task('html', function () {
 	gulp.src('./src/views/*.html')
