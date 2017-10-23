@@ -13,7 +13,17 @@ gulp.task('html', () =>
 
 gulp.task('stylint', () =>
 	gulp.src('./src/styles/*.styl')
-	.pipe(stylint())
+	.pipe(stylint({
+		rules: {
+			"brackets": "always",
+			"colons": "always",
+			"commaSpace0": "always",
+			"parenSpace": "never",
+			"quotePref", "double",
+			"semicolons": "always",
+			"sortOrder": "alphabetical"
+		}
+	}))
 	.pipe(stylint.reporter());
 );
 
