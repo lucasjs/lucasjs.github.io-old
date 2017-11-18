@@ -1,6 +1,8 @@
 const gulp = require('gulp');
 const stylint = require('gulp-stylint');
 const stylus = require('gulp-stylus');
+const poststylus = require('poststylus');
+const autoprefixer = require('autoprefixer');
 const imagemin = require('gulp-imagemin');
 const eslint = require('gulp-eslint');
 const babel = require('gulp-babel');
@@ -12,24 +14,26 @@ gulp.task('html', () =>
 );
 
 gulp.task('stylint', () =>
-	gulp.src('./src/styles/*.styl')
+	gulp.src(['./src/styles/*.styl', './src/styles/**/*.styl'])
 	.pipe(stylint({
 		rules: {
 			"brackets": "always",
 			"colons": "always",
-			"commaSpace0": "always",
+			"commaSpace": "always",
 			"parenSpace": "never",
-			"quotePref", "double",
 			"semicolons": "always",
 			"sortOrder": "alphabetical"
 		}
 	}))
-	.pipe(stylint.reporter());
+	.pipe(stylint.reporter())
 );
 
 gulp.task('stylus', () =>
-	gulp.src('./src/styles/*.styl')
+	gulp.src('./src/styles/*.styl')	
 	.pipe(stylus({
+		use: [
+			poststylus([ autoprefixer, lost ])
+		],
 		compress: true
 	}))
 	.pipe(gulp.dest('./build/css'))
@@ -59,12 +63,12 @@ gulp.task('imagemin', () =>
 	.pipe(connect.reload())
 );
 
-gulp.task('watch', () =>
-	gulp.watch('./src/views/*.html', ['html'])
-	gulp.watch(['./src/styles/*.styl'], ['stylint', 'stylus'])
-	gulp.watch(['./src/js/*.js'], ['eslint'])	
-	gulp.watch(['./src/img/*.*'], ['imagemin'])	
-);
+gulp.task('watch', () => {
+	gulp.watch(['./src/views/*.html'],['html'])
+	gulp.watch(['./src/styles/*.styl', './src/styles/**/*.styl'],['stylint', 'stylus'])
+	gulp.watch(['./src/js/*.js'],['eslint', 'babel'])
+	gulp.watch(['./src/img/*.*'],['imagemin'])	
+});
 
 gulp.task('connect', () =>
 	connect.server({
@@ -74,5 +78,5 @@ gulp.task('connect', () =>
 	});
 );
 
-gulp.task('build', ['html', 'stylint', 'stylus', 'imagemin', 'eslint', 'babel']);
+gulp.task('build', ['html', 'stylint', 'stylus', 'eslint', 'babel', 'imagemin']);
 gulp.task('server', ['connect', 'watch']);
